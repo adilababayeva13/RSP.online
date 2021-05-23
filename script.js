@@ -31,6 +31,7 @@ var msg=$("#sendMes").val();
 firebase.database().ref('/chat').on('value',(snap)=>{
   var json=snap.val();
 $("#mesajlasma").append(json.messages+"<br>");
+$("#sendMes").val("");
 });
 //////////////////////////////////////
                    
@@ -235,6 +236,7 @@ var user2Pic=json.player2.profile_picture;
               });
               if(current2==0){
                 $("#ResultWinner").css("opacity","1");
+                $("#ResultWinner").css("pointer-events","all");
                 $("#WinnerNAME").html(username1);
                 $("#winnerPicture").attr("src",user1Pic);
                 $("#reload").click(function(){  window.location.reload(); });
@@ -252,6 +254,7 @@ var user2Pic=json.player2.profile_picture;
               });
               if(current1==0){
                 $("#ResultWinner").css("opacity","1");
+                $("#ResultWinner").css("pointer-events","all");
                 $("#WinnerNAME").html(username2);
                 $("#winnerPicture").attr("src",user2Pic);
                 $("#reload").click(function(){  window.location.reload(); });
@@ -270,6 +273,7 @@ var user2Pic=json.player2.profile_picture;
               });
               if(current1==0){
                 $("#ResultWinner").css("opacity","1");
+                $("#ResultWinner").css("pointer-events","all");
                 $("#WinnerNAME").html(username2);
                 $("#winnerPicture").attr("src",user2Pic);
                 $("#reload").click(function(){  window.location.reload(); });
@@ -299,6 +303,7 @@ var user2Pic=json.player2.profile_picture;
               });
               if(current2==0){
                 $("#ResultWinner").css("opacity","1");
+                $("#ResultWinner").css("pointer-events","all");
                 $("#WinnerNAME").html(username1);
                 $("#winnerPicture").attr("src",user1Pic);
                 $("#reload").click(function(){  window.location.reload(); });
@@ -320,6 +325,7 @@ var user2Pic=json.player2.profile_picture;
    
               if(current2==0){
                 $("#ResultWinner").css("opacity","1");
+                $("#ResultWinner").css("pointer-events","all");
                 $("#WinnerNAME").html(username1);
                 $("#winnerPicture").attr("src",user1Pic);
                 $("#reload").click(function(){  window.location.reload(); });
@@ -337,6 +343,7 @@ var user2Pic=json.player2.profile_picture;
               });
               if(current1==0){
                 $("#ResultWinner").css("opacity","1");
+                $("#ResultWinner").css("pointer-events","all");
                 $("#WinnerNAME").html(username2);
                 $("#winnerPicture").attr("src",user2Pic);
                 $("#reload").click(function(){  window.location.reload(); });
