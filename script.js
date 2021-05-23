@@ -1,72 +1,5 @@
-        //define
-var IMGsrc="https://i.pinimg.com/736x/4b/26/4e/4b264e320ab57c8849f76071862a0447.jpg";
-var PlayerName="Guest";
 
-//function to get the avatar image soure
-    $("#av1").click(function(){
-   IMGsrc=this.src;
-    console.log(IMGsrc);
-    $("#av1").css("border","10px double rgb(32, 194, 59)");
-    $("#av2").css("border","7px dashed whitesmoke");
-    $("#av3").css("border","7px dashed whitesmoke");
-    $("#av4").css("border","7px dashed whitesmoke");
-    $("#av5").css("border","7px dashed whitesmoke");
-    $("#av6").css("border","7px dashed whitesmoke");
-        });
-        $("#av2").click(function(){
-           IMGsrc=this.src;
-    console.log(IMGsrc);
-    $("#av2").css("border","10px double rgb(32, 194, 59)");
-    $("#av1").css("border","7px dashed whitesmoke");
-    $("#av3").css("border","7px dashed whitesmoke");
-    $("#av4").css("border","7px dashed whitesmoke");
-    $("#av5").css("border","7px dashed whitesmoke");
-    $("#av6").css("border","7px dashed whitesmoke");
-        });
-        $("#av3").click(function(){
-    IMGsrc=this.src;
-    console.log(IMGsrc);
-    $("#av3").css("border","10px double rgb(32, 194, 59)");
-    $("#av2").css("border","7px dashed whitesmoke");
-    $("#av1").css("border","7px dashed whitesmoke");
-    $("#av4").css("border","7px dashed whitesmoke");
-    $("#av5").css("border","7px dashed whitesmoke");
-    $("#av6").css("border","7px dashed whitesmoke");
-        });
-        $("#av4").click(function(){
-    IMGsrc=this.src;
-    console.log(IMGsrc);
-    $("#av4").css("border","10px double rgb(32, 194, 59)");
-    $("#av2").css("border","7px dashed whitesmoke");
-    $("#av3").css("border","7px dashed whitesmoke");
-    $("#av1").css("border","7px dashed whitesmoke");
-    $("#av5").css("border","7px dashed whitesmoke");
-    $("#av6").css("border","7px dashed whitesmoke");
-        });
-        $("#av5").click(function(){
-    IMGsrc=this.src;
-    console.log(IMGsrc);
-    $("#av5").css("border","10px double rgb(32, 194, 59)");
-    $("#av2").css("border","7px dashed whitesmoke");
-    $("#av3").css("border","7px dashed whitesmoke");
-    $("#av4").css("border","7px dashed whitesmoke");
-    $("#av1").css("border","7px dashed whitesmoke");
-    $("#av6").css("border","7px dashed whitesmoke");
-        });
-        $("#av6").click(function(){
-     IMGsrc=this.src;
-    console.log(IMGsrc);
-    $("#av6").css("border","10px double rgb(32, 194, 59)");
-    $("#av2").css("border","7px dashed whitesmoke");
-    $("#av3").css("border","7px dashed whitesmoke");
-    $("#av4").css("border","7px dashed whitesmoke");
-    $("#av5").css("border","7px dashed whitesmoke");
-    $("#av1").css("border","7px dashed whitesmoke");
-        });
-   
-
-
-       // Your web app's Firebase configuration
+ // Your web app's Firebase configuration
   var firebaseConfig = {
     apiKey: "AIzaSyDEY6ddkaECHBEJ0ztmB--0SiVB7-s6xQ0",
     authDomain: "onlinersp-ee5e8.firebaseapp.com",
@@ -79,6 +12,73 @@ var PlayerName="Guest";
   firebase.initializeApp(firebaseConfig);
   var database= firebase.database();
 
+firebase.database().ref('/choiceOfPlayer2').set({
+  choice2:""
+    });
+firebase.database().ref('/choiceOfPlayer1').set({
+  choice1:""
+    });
+
+    /////////////////////////////
+$("#send").click(function(){
+var msg=$("#sendMes").val();
+
+ firebase.database().ref('/chat').set({
+  messages:msg
+    });
+});
+          
+firebase.database().ref('/chat').on('value',(snap)=>{
+  var json=snap.val();
+$("#mesajlasma").append(json.messages+"<br>");
+});
+//////////////////////////////////////
+                   
+          firebase.database().ref().on('value',(snap)=>{
+            var json=snap.val();
+            var cho1=json.choiceOfPlayer1.choice1;
+            var cho2=json.choiceOfPlayer2.choice2;
+        
+            console.log(cho1);
+            console.log(cho2);
+            if(cho1==""){
+              $("#img4").css("opacity","0.5");
+              $("#img5").css("opacity","0.5");
+              $("#img6").css("opacity","0.5");
+
+              $("#img4").css("pointer-events","none");
+              $("#img5").css("pointer-events","none");
+              $("#img6").css("pointer-events","none");
+
+              $("#img1").css("opacity","1");
+              $("#img2").css("opacity","1");
+              $("#img3").css("opacity","1");
+
+              $("#img1").css("pointer-events","all");
+              $("#img2").css("pointer-events","all");
+              $("#img3").css("pointer-events","all");
+         
+              }
+              else{
+                $("#img1").css("opacity","0.5");
+                $("#img2").css("opacity","0.5");
+                $("#img3").css("opacity","0.5");
+  
+                $("#img1").css("pointer-events","none");
+                $("#img2").css("pointer-events","none");
+                $("#img3").css("pointer-events","none");
+
+                $("#img4").css("opacity","1");
+                $("#img5").css("opacity","1");
+                $("#img6").css("opacity","1");
+  
+                $("#img4").css("pointer-events","all");
+                $("#img5").css("pointer-events","all");
+                $("#img6").css("pointer-events","all");
+              }
+          });
+
+     
 
  //online player define function
  $("#PlayButton").click(function(){
@@ -92,73 +92,50 @@ var PlayerName="Guest";
 firebase.database().ref('/player2').remove();
    
 firebase.database().ref('/player1').remove();
+firebase.database().ref('/chat').remove();
+
 }
 });
 
 
     firebase.database().ref("/player1").once("value", snapshot => {
    if (snapshot.exists()){
-    console.log("birinci online");
-
-
-
 firebase.database().ref('/player2').set({
 username:PlayerName,
-profile_picture :IMGsrc
+profile_picture :IMGsrc,
 });
-     
    }
    else{
-    console.log("NOexists!"); 
-    console.log("birinci online deyilmis");
 
 firebase.database().ref('/player1').set({
 username:PlayerName,
-profile_picture :IMGsrc
+profile_picture :IMGsrc,
 });
    }
 
 });
-     
-
  });
 
 
-//Button 
-document.addEventListener("DOMContentLoaded", function(){
-    var el = document.querySelector(".button-bird");
-    var text = document.querySelector(".button-bird__text");
-        el.addEventListener('click', function() {
-          el.classList.toggle('active');
-
-          if(el.classList.contains('active')){
-              console.log('true');
-              text.innerHTML = 'Loading...';
-              setTimeout(function(){ window.location.href = './play.html';}, 2500);
-             
-          }else{
-              text.innerHTML = 'Loading...';
-             
-          }
-      });
-  });
 var check=0;
   //message 
   $("#message").click(function(){
       if(check==0){
           check=1;
-   $(".chat").css("height","440px");
-   $(".mesajlasma").css("height","330px");
-   $("#sendMes").css("height","50px");
+          $(".chat").css("opacity","1");
+          $(".mesajlasma").css("opacity","1");
+          $("#sendMes").css("opacity","1");  
+     $("#send").css("opacity","1");
       }
       else{
-        $(".chat").css("height","0px");
-        $(".mesajlasma").css("height","0px");
-        $("#sendMes").css("height","0px");  
+        $(".chat").css("opacity","0");
+        $(".mesajlasma").css("opacity","0");
+        $("#sendMes").css("opacity","0");  
+   $("#send").css("opacity","0");
+
         check=0;
       }
   });
-
 
   //selected choice
   
@@ -201,25 +178,179 @@ $("#img5").click(function(){
 
 $("#img6").click(function(){
     firebase.database().ref('/choiceOfPlayer2').set({
-        choice:"scissors"
+        choice2:"scissors"
           });
     $('#selectedIMG2').attr('src',this.src);
 });
 
   
-    
-
+var current1=250;
+var current2=250;
+var marginLeft2=0;
 //avatar picture...
 firebase.database().ref('/player1').on('value',(snap)=>{
     var json=snap.val();
-    console.log(json.profile_picture);
+
     $("#Player1AvatarPic").attr("src",json.profile_picture);
+    $(".player1NAME").text(json.username);
   });
+  
 
   //.........second
 
   firebase.database().ref('/player2').on('value',(snap)=>{
     var json=snap.val();
-    console.log(json.profile_picture);
     $("#Player2AvatarPic").attr("src",json.profile_picture);
+    $(".player2NAME").text(json.username);
+  });
+
+
+  firebase.database().ref().on('value',(snap)=>{
+    var json=snap.val();
+    var cho1=json.choiceOfPlayer1.choice1;
+    var cho2=json.choiceOfPlayer2.choice2;
+var username1=json.player1.username;
+var username2=json.player2.username;
+var user1Pic=json.player1.profile_picture;
+var user2Pic=json.player2.profile_picture;
+
+     if(cho1=="paper"&& cho2=="paper"){
+      firebase.database().ref('/choiceOfPlayer2').set({
+        choice2:""
+          });
+          firebase.database().ref('/choiceOfPlayer1').set({
+            choice1:""
+              });
+     }
+ else if(cho1=="paper"&& cho2=="rock"){
+      current2=current2-50;
+      marginLeft2=marginLeft2+50;
+      $("#player2Heart").css("width", current2+'px');
+      $("#player2Heart").css("margin-left", marginLeft2+'px');
+       firebase.database().ref('/choiceOfPlayer2').set({
+        choice2:""
+          });
+          firebase.database().ref('/choiceOfPlayer1').set({
+            choice1:""
+              });
+              if(current2==0){
+                $("#ResultWinner").css("opacity","1");
+                $("#WinnerNAME").html(username1);
+                $("#winnerPicture").attr("src",user1Pic);
+                $("#reload").click(function(){  window.location.reload(); });
+                
+               }
+    }
+  else if(cho1=="paper"&& cho2=="scissors"){
+    current1=current1-50;
+      $("#player1Heart").css("width", current1+'px');
+       firebase.database().ref('/choiceOfPlayer2').set({
+        choice2:""
+          });
+          firebase.database().ref('/choiceOfPlayer1').set({
+            choice1:""
+              });
+              if(current1==0){
+                $("#ResultWinner").css("opacity","1");
+                $("#WinnerNAME").html(username2);
+                $("#winnerPicture").attr("src",user2Pic);
+                $("#reload").click(function(){  window.location.reload(); });
+                
+              }
+    }
+   else if(cho1=="rock"&& cho2=="paper"){
+  
+      current1=current1-50;
+      $("#player1Heart").css("width", current1+'px');
+       firebase.database().ref('/choiceOfPlayer2').set({
+        choice2:""
+          });
+          firebase.database().ref('/choiceOfPlayer1').set({
+            choice1:""
+              });
+              if(current1==0){
+                $("#ResultWinner").css("opacity","1");
+                $("#WinnerNAME").html(username2);
+                $("#winnerPicture").attr("src",user2Pic);
+                $("#reload").click(function(){  window.location.reload(); });
+                
+              }
+
+    }
+   else if(cho1=="rock"&& cho2=="rock"){
+       firebase.database().ref('/choiceOfPlayer2').set({
+        choice2:""
+          });
+          firebase.database().ref('/choiceOfPlayer1').set({
+            choice1:""
+              });
+     }
+  else if(cho1=="rock"&& cho2=="scissors"){
+     current2=current2-50;
+      marginLeft2=marginLeft2+50;
+      $("#player2Heart").css("width", current2+'px');
+      $("#player2Heart").css("margin-left", marginLeft2+'px');
+
+       firebase.database().ref('/choiceOfPlayer2').set({
+        choice2:""
+          });
+          firebase.database().ref('/choiceOfPlayer1').set({
+            choice1:""
+              });
+              if(current2==0){
+                $("#ResultWinner").css("opacity","1");
+                $("#WinnerNAME").html(username1);
+                $("#winnerPicture").attr("src",user1Pic);
+                $("#reload").click(function(){  window.location.reload(); });
+                
+               }
+    
+    }
+   else if(cho1=="scissors"&& cho2=="paper"){
+     current2=current2-50;
+      marginLeft2=marginLeft2+50;
+      $("#player2Heart").css("width", current2+'px');
+      $("#player2Heart").css("margin-left", marginLeft2+'px');
+       firebase.database().ref('/choiceOfPlayer2').set({
+        choice2:""
+          });
+          firebase.database().ref('/choiceOfPlayer1').set({
+            choice1:""
+              });
+   
+              if(current2==0){
+                $("#ResultWinner").css("opacity","1");
+                $("#WinnerNAME").html(username1);
+                $("#winnerPicture").attr("src",user1Pic);
+                $("#reload").click(function(){  window.location.reload(); });
+                
+               }
+    }
+   else if(cho1=="scissors"&& cho2=="rock"){
+      current1=current1-50;
+      $("#player1Heart").css("width", current1+'px');
+       firebase.database().ref('/choiceOfPlayer2').set({
+        choice2:""
+          });
+          firebase.database().ref('/choiceOfPlayer1').set({
+            choice1:""
+              });
+              if(current1==0){
+                $("#ResultWinner").css("opacity","1");
+                $("#WinnerNAME").html(username2);
+                $("#winnerPicture").attr("src",user2Pic);
+                $("#reload").click(function(){  window.location.reload(); });
+                
+              }
+ }
+  else if(cho1=="scissors"&& cho2=="scissors"){
+    firebase.database().ref('/choiceOfPlayer2').set({
+      choice2:""
+        });
+        firebase.database().ref('/choiceOfPlayer1').set({
+          choice1:""
+            });
+  }
+
+
   });

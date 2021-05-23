@@ -84,7 +84,92 @@
 
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
  <script src="script.js"></script>
+<script>
+            //define
+var IMGsrc="https://i.pinimg.com/736x/4b/26/4e/4b264e320ab57c8849f76071862a0447.jpg";
+var PlayerName="Guest";
 
+//function to get the avatar image soure
+    $("#av1").click(function(){
+   IMGsrc=this.src;
+    console.log(IMGsrc);
+    $("#av1").css("border","10px double rgb(32, 194, 59)");
+    $("#av2").css("border","7px dashed whitesmoke");
+    $("#av3").css("border","7px dashed whitesmoke");
+    $("#av4").css("border","7px dashed whitesmoke");
+    $("#av5").css("border","7px dashed whitesmoke");
+    $("#av6").css("border","7px dashed whitesmoke");
+        });
+        $("#av2").click(function(){
+           IMGsrc=this.src;
+    console.log(IMGsrc);
+    $("#av2").css("border","10px double rgb(32, 194, 59)");
+    $("#av1").css("border","7px dashed whitesmoke");
+    $("#av3").css("border","7px dashed whitesmoke");
+    $("#av4").css("border","7px dashed whitesmoke");
+    $("#av5").css("border","7px dashed whitesmoke");
+    $("#av6").css("border","7px dashed whitesmoke");
+        });
+        $("#av3").click(function(){
+    IMGsrc=this.src;
+    console.log(IMGsrc);
+    $("#av3").css("border","10px double rgb(32, 194, 59)");
+    $("#av2").css("border","7px dashed whitesmoke");
+    $("#av1").css("border","7px dashed whitesmoke");
+    $("#av4").css("border","7px dashed whitesmoke");
+    $("#av5").css("border","7px dashed whitesmoke");
+    $("#av6").css("border","7px dashed whitesmoke");
+        });
+        $("#av4").click(function(){
+    IMGsrc=this.src;
+    console.log(IMGsrc);
+    $("#av4").css("border","10px double rgb(32, 194, 59)");
+    $("#av2").css("border","7px dashed whitesmoke");
+    $("#av3").css("border","7px dashed whitesmoke");
+    $("#av1").css("border","7px dashed whitesmoke");
+    $("#av5").css("border","7px dashed whitesmoke");
+    $("#av6").css("border","7px dashed whitesmoke");
+        });
+        $("#av5").click(function(){
+    IMGsrc=this.src;
+    console.log(IMGsrc);
+    $("#av5").css("border","10px double rgb(32, 194, 59)");
+    $("#av2").css("border","7px dashed whitesmoke");
+    $("#av3").css("border","7px dashed whitesmoke");
+    $("#av4").css("border","7px dashed whitesmoke");
+    $("#av1").css("border","7px dashed whitesmoke");
+    $("#av6").css("border","7px dashed whitesmoke");
+        });
+        $("#av6").click(function(){
+     IMGsrc=this.src;
+    console.log(IMGsrc);
+    $("#av6").css("border","10px double rgb(32, 194, 59)");
+    $("#av2").css("border","7px dashed whitesmoke");
+    $("#av3").css("border","7px dashed whitesmoke");
+    $("#av4").css("border","7px dashed whitesmoke");
+    $("#av5").css("border","7px dashed whitesmoke");
+    $("#av1").css("border","7px dashed whitesmoke");
+        });
+   
+   //Button 
+document.addEventListener("DOMContentLoaded", function(){
+    var el = document.querySelector(".button-bird");
+    var text = document.querySelector(".button-bird__text");
+        el.addEventListener('click', function() {
+          el.classList.toggle('active');
+
+          if(el.classList.contains('active')){
+              console.log('true');
+              text.innerHTML = 'Loading...';
+              setTimeout(function(){ window.location.href = './play.html';}, 2500);
+             
+          }else{
+              text.innerHTML = 'Loading...';
+             
+          }
+      });
+  });
+</script>
 
  
 </body>
