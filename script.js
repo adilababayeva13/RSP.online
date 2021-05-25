@@ -21,16 +21,18 @@ firebase.database().ref('/choiceOfPlayer1').set({
 
     /////////////////////////////
 $("#send").click(function(){
+  var userNAME= sessionStorage.getItem("player");
 var msg=$("#sendMes").val();
 
  firebase.database().ref('/chat').set({
+   name:userNAME,
   messages:msg
     });
 });
           
 firebase.database().ref('/chat').on('value',(snap)=>{
   var json=snap.val();
-$("#mesajlasma").append(json.messages+"<br>");
+$("#mesajlasma").append(json.name+':'+json.messages+"<br>");
 $("#sendMes").val("");
 });
 //////////////////////////////////////
@@ -89,7 +91,7 @@ $("#sendMes").val("");
    }
     firebase.database().ref("/player2").once("value", snapshot => {
    if (snapshot.exists()){
-   
+  
 firebase.database().ref('/player2').remove();
    
 firebase.database().ref('/player1').remove();
@@ -100,17 +102,29 @@ firebase.database().ref('/chat').remove();
 
 
     firebase.database().ref("/player1").once("value", snapshot => {
+    
    if (snapshot.exists()){
 firebase.database().ref('/player2').set({
 username:PlayerName,
 profile_picture :IMGsrc,
 });
+firebase.database().ref("/player2").once("value", snapshot => {
+    
+  var json=snapshot.val();
+  sessionStorage.setItem("player", json.username);
+  });
+
    }
    else{
 
 firebase.database().ref('/player1').set({
 username:PlayerName,
 profile_picture :IMGsrc,
+});
+firebase.database().ref("/player1").once("value", snapshot => {
+    
+var json=snapshot.val();
+sessionStorage.setItem("player", json.username);
 });
    }
 
