@@ -1177,3 +1177,9 @@ animation-iteration-count: infinite;
   opacity: 0;
   pointer-events: none;
 }
+#absol1{
+  visibility: hidden;
+}
+#absol2{
+  visibility: hidden;
+}
